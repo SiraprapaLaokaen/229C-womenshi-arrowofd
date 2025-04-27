@@ -28,12 +28,19 @@ public class Shoot : MonoBehaviour
  
                 // ใส่ความเร็วให้กระสุน
                 firedBullet.linearVelocity = projectileVelocity;
+
+                Destroy(firedBullet.gameObject, 5f); //ทำลายกระสุนหลังจาก5วิ
+
+            
  
             }//hit.collider 
  
         }//GetMouseButtonDown
  
     }// Update
+
+
+
 
     Vector2 CalculateProjectileVelocity (Vector2 origin, Vector2 target, float time)
     {
