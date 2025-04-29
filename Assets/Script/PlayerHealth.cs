@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            Destroy(gameObject); // ทำลายMonster
+            Destroy(gameObject); // ทำลายผู้เล่น
         }
     }
 }
