@@ -1,20 +1,34 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Monster : MonoBehaviour
 {
     public int maxHP = 2;
     private int currentHP;
 
+    // เก็บลูกศรที่กำลังอยู่ใน Trigger ตอนนี้
+    private HashSet<Collider2D> arrowsInside = new HashSet<Collider2D>();
+
     void Start()
     {
-        currentHP = maxHP; 
+        currentHP = maxHP;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Arrow"))
+        if (other.CompareTag("Arrow") && !arrowsInside.Contains(other))
         {
-            TakeDamage(1); //ลดเลือด
+            TakeDamage(1);
+            arrowsInside.Add(other);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Arrow") && arrowsInside.Contains(other))
+        {
+            arrowsInside.Remove(other);
         }
     }
 
@@ -25,7 +39,7 @@ public class Monster : MonoBehaviour
 
         if (currentHP <= 0)
         {
-            Destroy(gameObject); // ทำลายMonster
+            Destroy(gameObject);
         }
     }
 }

@@ -14,12 +14,17 @@ public class PlayerHealth : MonoBehaviour
     {
         if (other.CompareTag("Obstacle"))
         {
-            TakeDamage(1); //ลดเลือด
+            TakeDamage(1);
         }
 
         else if (other.CompareTag("Monster"))
         {
-            TakeDamage(2); //ลดเลือด
+            TakeDamage(2);
+        }
+
+        else if (other.CompareTag("Boss"))
+        {
+            TakeDamage(3);
         }
     }
 
