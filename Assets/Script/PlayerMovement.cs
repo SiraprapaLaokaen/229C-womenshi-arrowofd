@@ -40,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true;
         }
+
+        else if (collision.gameObject.CompareTag("Monster"))
+        {
+            isGrounded = true;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -52,7 +57,12 @@ public class PlayerMovement : MonoBehaviour
 
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
-            isGrounded = false;
+            isGrounded = true;
+        }
+
+        else if (collision.gameObject.CompareTag("Monster"))
+        {
+            isGrounded = true;
         }
     } 
 
