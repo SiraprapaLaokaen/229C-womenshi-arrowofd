@@ -8,9 +8,9 @@ public class CursorFollowMouse : MonoBehaviour
     void Start()
     {
         cursorRect = GetComponent<RectTransform>();
-        Cursor.visible = false; // ซ่อนเมาส์จริง
+        Cursor.visible = false; 
 
-        // ปิด Raycast Target เพื่อไม่ให้ขัดกับ UI ปุ่มต่าง ๆ
+        
         Image image = GetComponent<Image>();
         if (image != null)
         {

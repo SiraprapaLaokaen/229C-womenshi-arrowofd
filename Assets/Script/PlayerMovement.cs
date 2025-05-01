@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        // ปรับให้ตรวจว่า "ออกจากพื้นจริงๆ" เท่านั้น
+        
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
