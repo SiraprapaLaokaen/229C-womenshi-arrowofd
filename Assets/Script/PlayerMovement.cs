@@ -3,11 +3,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
-    public float jumpForce = 10f;
-    public bool isJumping = false;
-    
+    public float jumpForce = 2f;
+
     private float moveInput;
     private Rigidbody2D rb2d;
+    private bool isGrounded = false;
 
     void Start()
     {
@@ -21,34 +21,27 @@ public class PlayerMovement : MonoBehaviour
         // เคลื่อนที่ซ้าย-ขวา
         rb2d.linearVelocity = new Vector2(moveInput * speed, rb2d.linearVelocity.y);
 
-        if (Input.GetButtonDown("Jump") && !isJumping)
+        // กระโดดได้เมื่ออยู่บนพื้น
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb2d.AddForce(new Vector2(rb2d.linearVelocity.x, jumpForce));
+            rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isGrounded = false; // ป้องกันกระโดดซ้ำกลางอากาศ
         }
-
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if (other.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
-
-            isJumping = false;
-
+            isGrounded = true;
         }
+    }
 
-    }//OnCollisionEnter2D
-    
-    private void OnCollisionExit2D(Collision2D other)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-
-        if (other.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
-
-            isJumping = true;
-
+            isGrounded = false;
         }
-
-    }//OnCollisionExit2D
+    }
 }
