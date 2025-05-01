@@ -4,11 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-     public int maxHP = 5;
+    public int maxHP = 5;
     private int currentHP;
 
     public Slider healthBar;
     public GameObject losePanel;
+    public GameObject winPanel;
 
     void Start()
     {
@@ -36,6 +37,10 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(3);
         }
+        else if (other.CompareTag("Princess"))
+        {
+            ShowWinScreen();
+        }
     }
 
     void TakeDamage(int damage)
@@ -48,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHP <= 0)
         {
             ShowLoseScreen();
-            Destroy(gameObject);
+            
         }
     }
 
@@ -66,5 +71,14 @@ public class PlayerHealth : MonoBehaviour
     {
         Time.timeScale = 1f; // คืนเวลา
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // โหลดฉากปัจจุบันใหม่
+    }
+
+    void ShowWinScreen()
+    {
+        if (winPanel != null)
+        {
+            winPanel.SetActive(true);
+            Time.timeScale = 0f; // หยุดเกมตอนชนะ
+        }
     }
 }

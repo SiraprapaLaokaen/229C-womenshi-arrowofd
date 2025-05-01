@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - Monster
   - Boss
+  - Princess
   layers:
   - Default
   - TransparentFX
