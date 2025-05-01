@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f;
+   public float speed = 5f;
     public float jumpForce = 2f;
 
     private float moveInput;
@@ -35,13 +35,26 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true;
         }
+
+        else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            isGrounded = true;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        // ปรับให้ตรวจว่า "ออกจากพื้นจริงๆ" เท่านั้น
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
         }
-    }
+
+        else if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            isGrounded = false;
+        }
+    } 
+
+    
 }
